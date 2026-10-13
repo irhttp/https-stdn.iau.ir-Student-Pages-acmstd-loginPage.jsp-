@@ -1,51 +1,51 @@
-<!DOCTYPE html>
-<html lang="fa" dir="rtl">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>سامانه آموزشی</title>
-<style>
-  /* حذف کامل حاشیه‌ها و تنظیم تمام صفحه */
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  html, body {
-    width: 100%;
-    height: 100%;
-    overflow: hidden; /* حذف اسکرول‌بار */
-    background-color: #1e3763; /* رنگ پس‌زمینه در حین لود شدن عکس */
-  }
-
-  /* استایل عکس برای پر کردن کل صفحه نمایش */
-  .fullscreen-image {
-    display: block;
-    width: 100vw;         /* 100% عرض صفحه نمایش */
-    height: 100vh;        /* 100% ارتفاع صفحه نمایش */
-    object-fit: contain;  /* کل عکس دیده شود */
-    object-position: center;
-    /* اگر می‌خواهی عکس کل صفحه را بپوشاند و بریده شود، کلمه contain را به cover تغییر بده */
-  }
-</style>
-</head>
-<body>
-
-  <!-- ============================================================= -->
-  <!-- 👇👇👇 فقط این خط را تغییر بده 👇👇👇 -->
-  <!-- 
-       به جای "اینجا-آدرس-عکس-خودت-را-بگذارید.jpg" 
-       آدرس عکس اسکرین‌شات خود را قرار بده.
-       
-       مثال 1: اگر عکس آنلاین است: 
-       src="https://cdn.imgurl.ir/uploads/g147143_Negar_1791877677623.png"
-       
-       مثال 2: اگر عکس کنار فایل HTML است: 
+    مثال 2: اگر عکس کنار فایل HTML است: 
        src="screenshot.png"
   -->
   <img src="اینجا-آدرس-عکس-خودت-را-بگذارید.jpg" alt="اسکرین‌شات سامانه" class="fullscreen-image">
   <!-- ============================================================= -->
+
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تصویر تمام صفحه</title>
+    <style>
+        /* حذف حاشیه‌های پیش‌فرض مرورگر */
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden; /* جلوگیری از اسکرول */
+        }
+
+        /* تنظیم عکس برای پر کردن کل صفحه */
+        .fullscreen-image {
+            width: 100vw;  /* 100% عرض دید */
+            height: 100vh; /* 100% ارتفاع دید */
+            object-fit: cover; /* عکس را بدون کشیدگی، کل فضا را پر می‌کند */
+            display: block;
+        }
+
+        /* گزینه جایگزین: اگر می‌خواهید کل عکس دیده شود و کشیده نشود */
+        /*
+        .fullscreen-image {
+            width: 100vw;
+            height: 100vh;
+            object-fit: contain;
+            background-color: black;
+        }
+        */
+    </style>
+</head>
+<body>
+
+    <img src="https://cdn.imgurl.ir/uploads/g147143_Negar_1791877677623.png" 
+         alt="تصویر تمام صفحه" 
+         class="fullscreen-image">
 
 </body>
 </html>
