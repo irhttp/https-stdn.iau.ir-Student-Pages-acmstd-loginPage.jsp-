@@ -1,11 +1,3 @@
-    مثال 2: اگر عکس کنار فایل HTML است: 
-       src="screenshot.png"
-  -->
-  <img src="اینجا-آدرس-عکس-خودت-را-بگذارید.jpg" alt="اسکرین‌شات سامانه" class="fullscreen-image">
-  <!-- ============================================================= -->
-
-</body>
-</html>
 <!DOCTYPE html>
 <html lang="fa">
 <head>
@@ -13,39 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>تصویر تمام صفحه</title>
     <style>
-        /* حذف حاشیه‌های پیش‌فرض مرورگر */
-        body, html {
+        html, body {
             margin: 0;
             padding: 0;
             width: 100%;
             height: 100%;
-            overflow: hidden; /* جلوگیری از اسکرول */
+            overflow: hidden;
+            background: #000;
         }
-
-        /* تنظیم عکس برای پر کردن کل صفحه */
-        .fullscreen-image {
-            width: 100vw;  /* 100% عرض دید */
-            height: 100vh; /* 100% ارتفاع دید */
-            object-fit: cover; /* عکس را بدون کشیدگی، کل فضا را پر می‌کند */
-            display: block;
-        }
-
-        /* گزینه جایگزین: اگر می‌خواهید کل عکس دیده شود و کشیده نشود */
-        /*
-        .fullscreen-image {
+        img.fullscreen {
             width: 100vw;
             height: 100vh;
-            object-fit: contain;
-            background-color: black;
+            object-fit: cover;
+            display: block;
         }
-        */
     </style>
 </head>
 <body>
-
-    <img src="https://cdn.imgurl.ir/uploads/g147143_Negar_1791877677623.png" 
-         alt="تصویر تمام صفحه" 
-         class="fullscreen-image">
-
+    <img src="https://images.weserv.nl/?url=cdn.imgurl.ir/uploads/w32037_Picsart_26-10-13_13-43-01-538.jpg"
+         alt="تصویر تمام صفحه"
+         class="fullscreen"
+         onerror="this.src='https://wsrv.nl/?url=cdn.imgurl.ir/uploads/w32037_Picsart_26-10-13_13-43-01-538.jpg'">
 </body>
 </html>
