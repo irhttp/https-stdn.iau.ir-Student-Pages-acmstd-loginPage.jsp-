@@ -12,23 +12,19 @@
             height: 100%;
             overflow: hidden;
             background: #000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
         }
         img.fullscreen {
-            max-width: 100vw;
-            max-height: 100vh;
-            width: auto;
-            height: auto;
-            object-fit: contain;
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
             display: block;
         }
     </style>
 </head>
 <body>
-    <img src="https://images.weserv.nl/?url=cdn.imgurl.ir/uploads/w32037_Picsart_26-10-13_13-43-01-538.jpg"
-         alt="تصویر"
-         class="fullscreen">
+    <img src="https://images.weserv.nl/?url=cdn.imgurl.ir/uploads/n946523_Picsart_26-10-13_14-04-41-393.jpg"
+         alt="تصویر تمام صفحه"
+         class="fullscreen"
+         onerror="this.src='https://wsrv.nl/?url=cdn.imgurl.ir/uploads/n946523_Picsart_26-10-13_14-04-41-393.jpg'">
 </body>
 </html>
