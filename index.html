@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>سامانه نمونه آموزشی - دانشجویی</title>
+<style>
+:root{
+  --bg:#dbe6f6; 
+  --topbar:#2b63b8; 
+  --subnav:#eef2f8; 
+  --card:#ffffff; 
+  --text:#222b3a;
+  --soft:#e7edf8; 
+  --line:#c6d4ea; 
+  --sidebar:#1e3763; 
+  --sidebar-active:#2c5490;
+  --status:#eef1f6; 
+  --ok:#1c8a4a; 
+  --watermark:#c0392b; 
+  --thead:#274e8c;
+  box-sizing:border-box;
+}
+*{box-sizing:border-box}
+html,body{height:100%; margin:0; padding:0;}
+body{background:var(--bg);color:var(--text);font-family:Tahoma,"Vazirmatn",sans-serif;font-size:12.5px; direction:rtl; overflow-x: hidden;}
+
+/* نوار قرمز بالای صفحه */
+.watermark-bar{background:var(--watermark);color:#fff;text-align:center;padding:6px;font-size:12px;font-weight:bold;}
+
+/* شبیه‌سازی نوار مرورگر */
+.browser-chrome{background:#e3e6ea;padding:8px 14px 0;border-bottom:1px solid #c7ccd3; direction:ltr;}
+.tab{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid #c7ccd3;border-bottom:none;border-radius:8px 8px 0 0;padding:6px 14px;font-size:12px;color:#444; direction:rtl;}
+.addr{display:flex;align-items:center;gap:10px;background:#fff;margin:0 0 8px;border-radius:20px;padding:6px 16px;font-size:12px;color:#555;border:1px solid #c7ccd3; direction:ltr; text-align:left;}
+.addr .lock{color:#1c8a4a}
+.addr .url-text {flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
+
+/* هدر اصلی */
+header{background:var(--topbar);color:#fff;padding:12px 20px;display:flex;align-items:center;justify-content:space-between; direction:rtl;}
+.brand b{display:block;font-size:14px}
+.brand span{font-size:11px;opacity:.8}
+.icons{display:flex;gap:16px;font-size:13px;opacity:.95; align-items: center;}
+.icons span {cursor: pointer;}
+
+/* منوهای بالای صفحه */
+.subnav{background:var(--subnav);border-bottom:1px solid var(--line);padding:9px 20px;display:flex;gap:20px;font-size:12px;color:#44567c;align-items:center; direction:rtl;}
+.subnav .crumb{margin-right:auto;color:#8292ab}
+.util{background:var(--subnav);border-bottom:1px solid var(--line);padding:7px 20px;display:flex;gap:18px;font-size:12px;color:#44567c; direction:rtl;}
+.util span { cursor: pointer; color: #2b63b8;}
+.helprow{background:var(--card);border-bottom:1px solid var(--line);padding:8px 20px;font-size:12px;color:#44567c;display:flex;justify-content:flex-start;align-items:center;gap:6px; direction:rtl;}
+.helprow span { color: #2b63b8; cursor: pointer; }
+
+/* ساختار اصلی */
+.layout{display:flex;max-width:1400px;margin:0 auto; direction:rtl; min-height: calc(100vh - 200px);}
+.main{flex:1;padding:16px;min-width:0;}
+.sidebar{width:220px;background:var(--sidebar);color:#fff;padding:16px 10px;flex-shrink:0;}
+
+/* سایدبار */
+.sidebar .item{padding:11px 14px;border-radius:5px;font-size:12px;margin-bottom:5px;cursor:pointer; color: #dbe6f6;}
+.sidebar .item.active{background:var(--sidebar-active);font-weight:bold; color: #fff;}
+.sidebar .item:hover { background: #2c5490; }
+.sidebar .logo-wrap{text-align:center;padding:4px 0 20px}
+.sidebar .logo-wrap .emblem{width:56px;height:56px;border-radius:50%;background:#ffffff1a;margin:0 auto 8px;display:grid;place-items:center;font-size:10px;border:1px solid #ffffff40; color: #fff;}
+.sidebar .logo-wrap div.t{font-size:12px;line-height:1.6; color: #fff;}
+
+/* کارت‌ها */
+.card{background:var(--card);border:1px solid var(--line);border-radius:4px;margin-bottom:14px;overflow:hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.05);}
+.info{display:flex;gap:24px;padding:18px 20px;justify-content:space-between;align-items:center; direction:rtl; flex-wrap: wrap;}
+.info dl{margin:0;display:grid;grid-template-columns:auto auto;gap:10px 14px;font-size:13px;direction:rtl; text-align: right;}
+.info dt{color:#44567c; text-align:right; font-weight: bold; min-width: 80px;}
+.info dd{margin:0;font-weight:normal;text-align:right; color: #222b3a;}
+
+/* عکس دانشجو */
+.avatar{width:80px;height:95px;background:#f0f4fa;border:1px solid var(--line);display:flex;flex-direction: column;align-items:center;justify-content:center;font-size:10px;border-radius:2px;color:#8292ab;text-align:center; order: -1; }
+
+/* وضعیت مالی */
+.status{background:var(--status);padding:14px 20px;display:flex;justify-content:space-between;font-weight:bold;gap:10px;flex-wrap:wrap;font-size:13px;border-top:1px solid var(--line); direction:rtl;}
+.status span {color: #222b3a;}
+.status .amount {color: #000; font-weight: bold;}
+
+/* جدول */
+.title{background:var(--thead);color:#fff;padding:9px 14px;font-weight:bold;font-size:13px; text-align: right;}
+.scroll{overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:800px; direction:rtl;}
+th{background:var(--thead);color:#fff;padding:10px 6px;font-size:11.5px;font-weight:normal; border: 1px solid #3b6bb5;}
+td{padding:10px 6px;text-align:center;border-bottom:1px solid var(--line);font-size:11.5px; border-left: 1px solid #e0e7f1; border-right: 1px solid #e0e7f1;}
+tr:nth-child(even) td{background:#f8fafc;}
+tr:hover td {background: #eef4ff;}
+.ok{color:var(--ok);font-weight:bold;}
+
+.foot-watermark{text-align:center;color:var(--watermark);font-size:11px;padding:14px;font-weight:bold;}
+
+/* ===== پنل ویرایش اطلاعات (شناور) ===== */
+.edit-panel {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    background: #fff;
+    border: 2px solid #2b63b8;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    z-index: 9999;
+    width: 300px;
+    direction: rtl;
+    font-size: 12px;
+    display: block;
+}
+.edit-panel h4 { margin: 0 0 10px 0; color: #2b63b8; text-align: center; border-bottom: 1px solid #eee; padding-bottom: 5px;}
+.edit-panel label { display: block; margin-top: 8px; font-weight: bold; color: #333;}
+.edit-panel input { width: 100%; padding: 6px; margin-top: 4px; border: 1px solid #ccc; border-radius: 4px; font-family: inherit;}
+.edit-panel button { width: 100%; padding: 8px; margin-top: 12px; background: #2b63b8; color: #fff; border: none; border-radius: 4px; cursor: pointer; font-weight: bold;}
+.edit-panel button:hover { background: #1e4a8a; }
+.edit-panel .close-btn { background: #c0392b; margin-top: 5px; padding: 5px; font-size: 10px;}
+
+/* واکنش‌گرایی */
+@media (max-width:900px){
+  .sidebar{display:none;}
+  .info {flex-direction: column; align-items: flex-start;}
+  .avatar {order: 0; margin-bottom: 15px; align-self: center;}
+  .edit-panel { width: 250px; bottom: 10px; left: 10px; }
+}
+</style>
+</head>
+<body>
+
+<!-- نوار قرمز بالای صفحه (واترمارک) -->
+<div class="watermark-bar">سامانه نمونه آموزشی - فقط جهت آموزش روش استفاده از سامانه، بدون ارتباط با سامانه واقعی دانشگاه</div>
+
+<!-- شبیه‌سازی نوار مرورگر -->
+<div class="browser-chrome">
+  <div class="tab">🖥 سامانه نمونه آموزشی - دانشجویی ✕</div>
+  <div class="addr">
+    <span class="lock">🔒</span>
+    <span class="url-text">stdn.sample-edu.local/Student/handlePaymentAction.do?dispatch=init&effectiveObj=2589729650&effectiveObjType=325198&termRef=</span>
+  </div>
+</div>
+
+<!-- هدر اصلی -->
+<header>
+  <div class="brand"><b>سامانه نمونه مدیریت امور آموزشی</b><span>آموزشی - نمونه</span></div>
+  <div class="icons">
+    <span>👤</span>
+    <span>✉️</span>
+    <span>خروج</span>
+  </div>
+</header>
+
+<!-- نوارهای راهبری -->
+<div class="util">
+  <span>بازگشت</span>
+  <span>چاپ صفحه جاری</span>
+  <span>درباره</span>
+</div>
+
+<div class="subnav">
+  <span>استان: نمونه</span>
+  <span>واحد: نمونه</span>
+  <span>دانشکده: نمونه</span>
+  <span>گروه آموزشی: نمونه</span>
+  <span>نیمسال: نمونه</span>
+  <span class="crumb">صفحه اول ‹ پرداخت الکترونیکی</span>
+</div>
+
+<div class="helprow">راهنما ❓</div>
+
+<!-- چیدمان اصلی (سایدبار سمت راست، محتوا سمت چپ) -->
+<div class="layout">
+  
+  <main class="main">
+    <!-- کارت اطلاعات دانشجو -->
+    <section class="card">
+      <div class="info">
+        <dl>
+          <dt>نام دانشجو:</dt><dd id="ui-name">دانشجوی نمونه</dd>
+          <dt>کد ملی:</dt><dd id="ui-national-id">۰۰۰۰۰۰۰۰۰۰</dd>
+          <dt>نام پدر:</dt><dd id="ui-father">نمونه</dd>
+          <dt>مقطع:</dt><dd id="ui-degree">کارشناسی ارشد</dd>
+          <dt>رشته:</dt><dd id="ui-field">رشته نمونه</dd>
+        </dl>
+        <div class="avatar">
+          <span>عکس نمونه</span>
+          <span style="font-size:8px; margin-top:5px;">(بدون تصویر واقعی)</span>
+        </div>
+      </div>
+      
+      <!-- وضعیت مالی -->
+      <div class="status">
+        <span>وضعیت نهایی مالی دانشجو: <span class="amount" id="ui-total">۰</span> ریال</span>
+        <span>بدهکار: <span class="amount" id="ui-debt">۰</span> ریال</span>
+      </div>
+    </section>
+
+    <!-- کارت جدول بدهکاری -->
+    <section class="card">
+      <div class="title">بدهکاری دانشجو</div>
+      <div class="scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>مورد پرداخت</th>
+              <th>نوع پرداخت</th>
+              <th>نیمسال</th>
+              <th>مبلغ قابل پرداخت</th>
+              <th>تاریخ سند</th>
+              <th>بانک</th>
+              <th>وضعیت</th>
+              <th>توضیحات</th>
+            </tr>
+          </thead>
+          <tbody id="rows">
+            <!-- داده‌ها با جاوااسکریپت پر می‌شوند -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <div class="foot-watermark">تمام نام‌ها، کدها، تصاویر و مبالغ این صفحه ساختگی هستند و صرفاً جهت آموزش نحوه‌ی کار با سامانه ساخته شده‌اند.</div>
+  </main>
+
+  <!-- سایدبار سمت راست -->
+  <aside class="sidebar">
+    <div class="logo-wrap">
+      <div class="emblem">آرم نمونه</div>
+      <div class="t">سامانه نمونه<br>آموزشی</div>
+    </div>
+    <div class="item">ثبت نام دروس دانشجو</div>
+    <div class="item">انتخاب واحد</div>
+    <div class="item">حذف و اضافه</div>
+    <div class="item">حذف اضطراری</div>
+    <div class="item">مشاهده آخرین وضعیت ثبت نام</div>
+    <div class="item active">مدیریت مالی نیمسال‌های تحصیلی</div>
+    <div class="item">ارسال درخواست اعتراض به نمره</div>
+    <div class="item">درخواست/مجوز</div>
+    <div class="item">ارزشیابی اساتید</div>
+  </aside>
+
+</div>
+
+<!-- ===== پنل ویرایش اطلاعات دانشجو ===== -->
+<div class="edit-panel" id="editPanel">
+    <h4>✏️ ویرایش اطلاعات دانشجو</h4>
+    
+    <label>نام دانشجو:</label>
+    <input type="text" id="input-name" value="دانشجوی نمونه" placeholder="مثلا: علی رضایی">
+    
+    <label>کد ملی:</label>
+    <input type="text" id="input-national-id" value="۰۰۰۰۰۰۰۰۰۰" placeholder="مثلا: ۱۲۳۴۵۶۷۸۹۰">
+    
+    <label>نام پدر:</label>
+    <input type="text" id="input-father" value="نمونه" placeholder="مثلا: محمد">
+    
+    <label>مقطع:</label>
+    <input type="text" id="input-degree" value="کارشناسی ارشد" placeholder="مثلا: کارشناسی">
+    
+    <label>رشته:</label>
+    <input type="text" id="input-field" value="رشته نمونه" placeholder="مثلا: مهندسی کامپیوتر">
+    
+    <label>مبلغ کل (ریال):</label>
+    <input type="number" id="input-total" value="5000000" placeholder="مثلا: 5000000">
+    
+    <button onclick="applyChanges()">اعمال تغییرات در صفحه</button>
+    <button class="close-btn" onclick="document.getElementById('editPanel').style.display='none'">بستن پنل</button>
+</div>
+
+<script>
+// ===== داده‌های ساختگی برای جدول =====
+var d = [
+  ["انتقال اطلاعات از سیستم قبل", "انتقال اطلاعات از سیستم قبل", "نمونه", 20000, "-", "-", "تایید شده", "بیمه"],
+  ["انتقال اطلاعات از سیستم قبل", "انتقال اطلاعات از سیستم قبل", "نمونه", 1030000, "-", "-", "تایید شده", "هزینه خدمات آموزشی"],
+  ["انتقال اطلاعات از سیستم قبل", "انتقال اطلاعات از سیستم قبل", "نمونه", 11153380, "-", "-", "تایید شده", "شهریه"],
+  ["انتقال اطلاعات از سیستم قبل", "انتقال اطلاعات از سیستم قبل", "نمونه", 11404430, "-", "-", "تایید شده", "شهریه"],
+  ["انتقال اطلاعات از سیستم قبل", "انتقال اطلاعات از سیستم قبل", "نمونه", 4823540, "-", "-", "تایید شده", "شهریه"],
+  ["انتقال اطلاعات از سیستم قبل", "انتقال اطلاعات از سیستم قبل", "نمونه", 27500, "-", "-", "تایید شده", "بیمه"],
+  ["انتقال اطلاعات از سیستم قبل", "انتقال اطلاعات از سیستم قبل", "نمونه", 12119932, "-", "-", "تایید شده", "شهریه"],
+  ["انتقال اطلاعات از سیستم قبل", "انتقال اطلاعات از سیستم قبل", "نمونه", 12432288, "-", "-", "تایید شده", "شهریه"],
+  ["انتقال اطلاعات از سیستم قبل", "انتقال اطلاعات از سیستم قبل", "نمونه", 12986060, "-", "-", "تایید شده", "شهریه"],
+  ["انتقال اطلاعات از سیستم قبل", "انتقال اطلاعات از سیستم قبل", "نمونه", 27500, "-", "-", "تایید شده", "بیمه"],
+  ["انتقال اطلاعات از سیستم قبل", "انتقال اطلاعات از سیستم قبل", "نمونه", 15543918, "-", "-", "تایید شده", "شهریه"],
+  ["انتقال اطلاعات از سیستم قبل", "انتقال اطلاعات از سیستم قبل", "نمونه", 5222714, "-", "-", "تایید شده", "شهریه"],
+  ["انتقال اطلاعات از سیستم قبل", "انتقال اطلاعات از سیستم قبل", "نمونه", 30000, "-", "-", "تایید شده", "بدهی شهریه"],
+  ["انتقال اطلاعات از سیستم قبل", "انتقال اطلاعات از سیستم قبل", "نمونه", 31500, "-", "-", "تایید شده", "بیمه"]
+];
+
+// تابع فرمت اعداد با کاما
+var fmt = function(n) {
+    return n.toLocaleString("en-US");
+};
+
+// تابع برای ساخت جدول
+function renderTable() {
+    var sum = 0;
+    var h = "";
+    d.forEach(function(r){
+      sum += r[3];
+      h += "<tr>";
+      h += "<td>" + r[0] + "</td>";
+      h += "<td>" + r[1] + "</td>";
+      h += "<td>" + r[2] + "</td>";
+      h += "<td>" + fmt(r[3]) + "</td>";
+      h += "<td>" + r[4] + "</td>";
+      h += "<td>" + r[5] + "</td>";
+      h += "<td class='ok'>" + r[6] + "</td>";
+      h += "<td>" + r[7] + "</td>";
+      h += "</tr>";
+    });
+    document.getElementById("rows").innerHTML = h;
+    return sum;
+}
+
+// محاسبه مجموع اولیه و نمایش
+var initialSum = renderTable();
+document.getElementById("ui-total").textContent = fmt(initialSum);
+document.getElementById("ui-debt").textContent = fmt(initialSum);
+
+// ===== تابع اعمال تغییرات از پنل ویرایش =====
+function applyChanges() {
+    // دریافت مقادیر از ورودی‌ها
+    var name = document.getElementById('input-name').value;
+    var nationalId = document.getElementById('input-national-id').value;
+    var father = document.getElementById('input-father').value;
+    var degree = document.getElementById('input-degree').value;
+    var field = document.getElementById('input-field').value;
+    var totalInput = document.getElementById('input-total').value;
+
+    // اعمال در صفحه اصلی
+    document.getElementById('ui-name').textContent = name || '---';
+    document.getElementById('ui-national-id').textContent = nationalId || '---';
+    document.getElementById('ui-father').textContent = father || '---';
+    document.getElementById('ui-degree').textContent = degree || '---';
+    document.getElementById('ui-field').textContent = field || '---';
+
+    // اگر مبلغ وارد شده بود، آن را اعمال کن
+    if (totalInput && !isNaN(totalInput)) {
+        var formattedTotal = fmt(parseInt(totalInput));
+        document.getElementById('ui-total').textContent = formattedTotal;
+        document.getElementById('ui-debt').textContent = formattedTotal;
+    } else {
+        // اگر مبلغ خالی بود، مجموع جدول را نمایش بده
+        var sum = renderTable();
+        document.getElementById('ui-total').textContent = fmt(sum);
+        document.getElementById('ui-debt').textContent = fmt(sum);
+    }
+
+    // بستن پنل بعد از اعمال (اختیاری)
+    // document.getElementById('editPanel').style.display = 'none';
+}
+</script>
+</body>
+</html>
